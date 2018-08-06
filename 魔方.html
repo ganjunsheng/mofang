@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>魔方</title>
+    <style>
+        body {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            padding: 0;
+            margin: 0 auto;
+        }
+        /*整体视角与样式*/
+        
+        .perspective {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            -webkit-transform: perspective(1500px);
+            -moz-transform: perspective(1500px);
+        }
+        /*整体3d效果*/
+        
+        .m3d {
+            -moz-transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+            -webkit-animation-name: animation;
+            -o-animation-name: animation;
+            animation-name: animation;
+            -webkit-animation-timing-function: ease-in-out;
+            -o-animation-timing-function: ease-in-out;
+            animation-timing-function: ease-in-out;
+            -webkit-animation-iteration-count: infinite;
+            -o-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+            -webkit-animation-duration: 9s;
+            -o-animation-duration: 9s;
+            animation-duration: 9s;
+            margin: 100px;
+            -webkit-transform-origin: 150px 150px 0;
+            -moz-transform-origin: 150px 150px 0;
+            -ms-transform-origin: 150px 150px 0;
+            -o-transform-origin: 150px 150px 0;
+            transform-origin: 150px 150px 0;
+        }
+        /*六个面的样式*/
+        
+        .perspective div {
+            display: block;
+            position: absolute;
+            width: 298px;
+            height: 298px;
+            border: 1px solid rgba(255, 200, 0, 0.2);
+            border-radius: 3%;
+        }
+        /*正面样式*/
+        
+        .front {
+            -webkit-transform: rotateY(0deg) translateZ(150px);
+            -moz-transform: rotateY(0deg) translateZ(150px);
+        }
+        /*正面小块颜色*/
+        
+        .front div {
+            background: rgba(57, 170, 174, 0.8);
+        }
+        /*背面样式*/
+        
+        .back {
+            -webkit-transform: rotateY(180deg) translateZ(150px);
+            -moz-transform: rotateY(180deg) translateZ(150px);
+        }
+        /*背面小块颜色*/
+        
+        .back div {
+            background: rgba(99, 234, 106, 0.8);
+        }
+        /*右面样式*/
+        
+        .right {
+            -webkit-transform: rotateY(90deg) translateZ(150px);
+            -moz-transform: rotateY(90deg) translateZ(150px);
+        }
+        /*右面小块颜色*/
+        
+        .right {
+            background: rgba(57, 209, 209, 0.8);
+        }
+        /*左面样式*/
+        
+        .left {
+            -webkit-transform: rotateY(-90deg) translateZ(150px);
+            -moz-transform: rotateY(-90deg) translateZ(150px);
+        }
+        /*左面小块颜色*/
+        
+        .left div {
+            background: rgba(252, 29, 20, 0.8);
+        }
+        /*上面样式*/
+        
+        .top {
+            -webkit-transform: rotateX(90deg) translateZ(150px);
+            -moz-transform: rotateX(90deg) translateZ(150px);
+        }
+        /*上面小块颜色*/
+        
+        .top div {
+            background: rgba(20, 252, 55, 0.8);
+        }
+        /*下面样式*/
+        
+        .bottom {
+            -webkit-transform: rotateX(-90deg) translateZ(150px);
+            -moz-transform: rotateX(-90deg) translateZ(150px);
+        }
+        /*下面小块颜色*/
+        
+        .bottom div {
+            background: rgba(20, 39, 252, 0.8);
+        }
+        /*小块的样式*/
+        
+        .big div {
+            width: 97px;
+            height: 98px;
+            display: block;
+            float: left;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            ;
+            border-radius: 10%;
+        }
+        /*整体旋转方式*/
+        /* @-webkit-keyframes animation {
+            from {
+                -webkit-transform: rotatey(0) rotateX(0);
+            }
+            to {
+                -webkit-transform: rotatey(360deg) rotateX(360deg);
+            }
+        }
+        
+        @keyframes animation {
+            from {
+                transform: rotatey(0) rotateX(0);
+            }
+            to {
+                transform: rotatey(360deg) rotateX(360deg);
+            }
+        } */
+        /*整体旋转方式*/
+        
+        @-webkit-keyframes animation {
+            from,
+            to {}
+            16% {
+                -webkit-transform: rotatey(-90deg);
+            }
+            33% {
+                -webkit-transform: rotatey(-90deg) rotateZ(135deg);
+            }
+            50% {
+                -webkit-transform: rotatey(225deg) rotateZ(135deg);
+            }
+            66% {
+                -webkit-transform: rotatey(135deg) rotateX(135deg);
+            }
+            85% {
+                -webkit-transform: rotatex(135deg);
+            }
+        }
+        /*整体旋转方式*/
+        
+        @keyframes animation {
+            from,
+            to {}
+            16% {
+                transform: rotatey(-90deg);
+            }
+            33% {
+                transform: rotatey(-90deg) rotateZ(135deg);
+            }
+            50% {
+                transform: rotatey(225deg) rotateZ(135deg);
+            }
+            66% {
+                transform: rotatey(135deg) rotateX(135deg);
+            }
+            85% {
+                transform: rotatey(135deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 整体布局 -->
+    <div class="perspective m3d">
+        <!-- 六个面 -->
+        <div class="front big">
+            <!-- 九块 -->
+            <div class="one small"></div>
+            <div class="two small"></div>
+            <div class="three small"></div>
+            <div class="four small"></div>
+            <div class="five small"></div>
+            <div class="six small"></div>
+            <div class="seven small"></div>
+            <div class="eight small"></div>
+            <div class="nine small"></div>
+        </div>
+        <!-- 六个面 -->
+        <div class="back big">
+            <!-- 九块 -->
+            <div class="one small"></div>
+            <div class="two small"></div>
+            <div class="three small"></div>
+            <div class="four small"></div>
+            <div class="five small"></div>
+            <div class="six small"></div>
+            <div class="seven small"></div>
+            <div class="eight small"></div>
+            <div class="nine small"></div>
+        </div>
+        <!-- 六个面 -->
+        <div class="right big">
+            <!-- 九块 -->
+            <div class="one small"></div>
+            <div class="two small"></div>
+            <div class="three small"></div>
+            <div class="four small"></div>
+            <div class="five small"></div>
+            <div class="six small"></div>
+            <div class="seven small"></div>
+            <div class="eight small"></div>
+            <div class="nine small"></div>
+        </div>
+        <!-- 六个面 -->
+        <div class="left big">
+            <!-- 九块 -->
+            <div class="one small"></div>
+            <div class="two small"></div>
+            <div class="three small"></div>
+            <div class="four small"></div>
+            <div class="five small"></div>
+            <div class="six small"></div>
+            <div class="seven small"></div>
+            <div class="eight small"></div>
+            <div class="nine small"></div>
+        </div>
+        <!-- 六个面 -->
+        <div class="top big">
+            <!-- 九块 -->
+            <div class="one small"></div>
+            <div class="two small"></div>
+            <div class="three small"></div>
+            <div class="four small"></div>
+            <div class="five small"></div>
+            <div class="six small"></div>
+            <div class="seven small"></div>
+            <div class="eight small"></div>
+            <div class="nine small"></div>
+        </div>
+        <!-- 六个面 -->
+        <div class="bottom big">
+            <!-- 九块 -->
+            <div class="one small"></div>
+            <div class="two small"></div>
+            <div class="three small"></div>
+            <div class="four small"></div>
+            <div class="five small"></div>
+            <div class="six small"></div>
+            <div class="seven small"></div>
+            <div class="eight small"></div>
+            <div class="nine small"></div>
+        </div>
+    </div>
+</body>
+
+</html>
